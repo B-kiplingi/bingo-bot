@@ -132,8 +132,7 @@ public class BingoCard {
                 break;
             }
         }
-        if (hasWon) {return true;}
-        else {return false;}
+        return hasWon;
     }
 
     public static int[] parseCoords(String coord) {
