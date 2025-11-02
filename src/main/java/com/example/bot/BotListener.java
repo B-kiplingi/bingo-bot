@@ -123,17 +123,17 @@ public class BotListener extends ListenerAdapter {
                     if (card.hasWon()) {
                         if(manager.isActive()) {
                             manager.endRound(event.getUser().getIdLong());
-                            event.reply("🎉 **BINGO!** You won! Congratulations!").setEphemeral(true).queue();
+                            event.reply("**BINGO!** You won! Congratulations!").setEphemeral(true).queue();
                             // announce to the channel
                             try (InputStream stream = getClass().getResourceAsStream("/res/winner.jpg")) {
                                 if (stream == null) {
                                     event.reply("❌ Could not find the image inside the jar!").setEphemeral(true).queue();
                                     return;
                                 }
-
-                                event.getChannel().sendMessage(event.getUser().getAsMention() + " congratulation, you have been české-dráhyed the most!").addFiles(FileUpload.fromData(stream, "win.jpg")).queue();
+                                byte[] bytes = stream.readAllBytes();
+                                event.getChannel().sendMessage(event.getUser().getAsMention() + " congratulation, you have been české-dráhyed the most!").addFiles(FileUpload.fromData(bytes, "win.jpg")).queue();
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
                         } else {
                             event.reply("You weren't the first, unfortunately.").setEphemeral(true).queue();

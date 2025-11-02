@@ -9,8 +9,8 @@ public class TableImageGenerator {
         int rows = labels.length;
         int cols = labels[0].length;
 
-        int cellWidth = 150;
-        int cellHeight = 80;
+        int cellWidth = 200;
+        int cellHeight = 100;
         int borderThickness = 2;
         int labelMargin = 30; // Space for coordinate labels
 
