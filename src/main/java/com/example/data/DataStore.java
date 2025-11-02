@@ -11,12 +11,13 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 public class DataStore {
-    private static final String STATE_FILE = "bingo-state.json";
+    private static final String STATE_FILE = "data/bingo-state.json";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void saveState(DataStore.StateData data) {
         try {
             String json = gson.toJson(data);
+            System.out.println("path:" + Paths.get(STATE_FILE));
             Files.writeString(Paths.get(STATE_FILE), json);
             System.out.println("State saved");
         } catch (IOException e) {

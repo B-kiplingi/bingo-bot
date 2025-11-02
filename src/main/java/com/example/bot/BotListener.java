@@ -48,6 +48,17 @@ public class BotListener extends ListenerAdapter {
                     event.reply("No active round.").setEphemeral(true).queue();
                     return;
                 }
+
+                if (!manager.isActive()) {
+                    event.reply("This round already ended!").setEphemeral(true).queue();
+                    return;
+                }
+
+                if (manager.getCurrentRound().isPlaying(event.getUser().getIdLong())) {
+                    event.reply("You already joined this round!").setEphemeral(true).queue();
+                    return;
+                }
+
                 BingoCard card = round.addPlayer(event.getUser().getIdLong());
 
                 manager.onPlayerAction();
