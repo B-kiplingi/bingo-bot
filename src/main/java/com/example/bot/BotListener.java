@@ -6,8 +6,10 @@ import com.example.bingo.BingoRound;
 import com.example.bingo.BingoSource;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 public class BotListener extends ListenerAdapter {
@@ -123,7 +125,16 @@ public class BotListener extends ListenerAdapter {
                             manager.endRound(event.getUser().getIdLong());
                             event.reply("🎉 **BINGO!** You won! Congratulations!").setEphemeral(true).queue();
                             // announce to the channel
-                            event.getChannel().sendMessage("🏆 " + event.getUser().getAsMention() + " won the bingo round!").queue();
+                            try (InputStream stream = getClass().getResourceAsStream("/res/winner.jpg")) {
+                                if (stream == null) {
+                                    event.reply("❌ Could not find the image inside the jar!").setEphemeral(true).queue();
+                                    return;
+                                }
+
+                                event.getChannel().sendMessage(event.getUser().getAsMention() + " congratulation, you have been české-dráhyed the most!").addFiles(FileUpload.fromData(stream, "win.jpg")).queue();
+                            } catch (Exception e) {
+
+                            }
                         } else {
                             event.reply("You weren't the first, unfortunately.").setEphemeral(true).queue();
                         }
