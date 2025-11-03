@@ -19,6 +19,9 @@ public class CommandRegistrar extends ListenerAdapter {
         jda.upsertCommand("bingo-check", "Mark an item on your bingo card")
                 .addOptions(new OptionData(OptionType.STRING, "item", "The item text to mark", true))
                 .queue();
+        jda.upsertCommand("bingo-uncheck", "Made a mistake? you can uncheck a field with this command")
+                .addOptions(new OptionData(OptionType.STRING, "item", "The item text to unmark", true))
+                .queue();
 
         System.out.println("Commands registered!");
     }

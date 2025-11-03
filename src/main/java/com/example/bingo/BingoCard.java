@@ -36,6 +36,18 @@ public class BingoCard {
         return false;
     }
 
+    public boolean uncheck(String item) {
+        int[] coords = parseCoords(item);
+        int x = coords[0];
+        int y = coords[1];
+
+        if( x >= 0 && x < 5 && y >= 0 && y < 5 && checked[x][y]) {
+            checked[x][y] = false;
+            return true;
+        }
+        return false;
+    }
+
     public File getCardMessage() {
         return generateTableImage(checked, layout, Long.toString(userId));
     }
